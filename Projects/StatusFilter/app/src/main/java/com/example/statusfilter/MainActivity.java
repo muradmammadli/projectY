@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         userList.add(new Users("James", 2, 1655279653));
         userList.add(new Users("Ben", 1, 1962109930));
         userList.add(new Users("William", 4, 1976080326));
+        userList.add(new Users("John", 5, 1576080326));
         setFilterAdapter();
     }
 

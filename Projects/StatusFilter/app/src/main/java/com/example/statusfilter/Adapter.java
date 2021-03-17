@@ -1,12 +1,15 @@
 package com.example.statusfilter;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -34,6 +37,12 @@ public class Adapter extends RecyclerView.Adapter<Adapter.userHolder> {
         holder.userName.setText(user.getUserName());
         holder.status.setText(String.valueOf(user.getStatusCode()));
         holder.timeStamp.setText(String.valueOf(user.getTimeStamp()));
+        if (position%3 == 2) {
+            holder.itemView.setBackgroundColor(Color.parseColor("#fafafa"));
+        } else {
+            holder.itemView.setBackgroundColor(Color.parseColor("#ffffff"));
+        }
+
     }
 
     @Override
@@ -43,12 +52,14 @@ public class Adapter extends RecyclerView.Adapter<Adapter.userHolder> {
 
     public class userHolder extends RecyclerView.ViewHolder {
         TextView userName, status, timeStamp;
+        CardView listItem;
 
         public userHolder(@NonNull View itemView) {
             super(itemView);
             userName = itemView.findViewById(R.id.username);
             status = itemView.findViewById(R.id.status);
             timeStamp = itemView.findViewById(R.id.date);
+            listItem = itemView.findViewById(R.id.cardView);
         }
     }
 
