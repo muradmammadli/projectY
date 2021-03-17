@@ -7,5 +7,6 @@
         android:icon="@drawable/ic_baseline_sort_24"
         android:id="@+id/filter"
         android:titleCondensed="Filter"
+        android:checkable="true"
         />
 </menu>

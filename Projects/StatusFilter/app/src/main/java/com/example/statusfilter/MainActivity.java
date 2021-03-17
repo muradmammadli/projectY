@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView.LayoutManager layoutManager;
     Adapter adapter;
     ArrayList<Users> userList;
-
+    private boolean isChecked = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,8 +37,14 @@ public class MainActivity extends AppCompatActivity {
         userList.add(new Users("James", 2, 1655279653));
         userList.add(new Users("Ben", 1, 1962109930));
         userList.add(new Users("William", 4, 1976080326));
-
         setFilterAdapter();
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem item = menu.findItem(R.id.filter);
+        item.setChecked(isChecked);
+        return super.onPrepareOptionsMenu(menu);
     }
 
     @Override
@@ -52,17 +58,23 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.filter:
-                Collections.sort(userList, new Comparator<Users>() {
-                    @Override
-                    public int compare(Users o1, Users o2) {
+                isChecked = !item.isChecked();
+                item.setChecked(isChecked);
+                if (isChecked){
+                    Collections.sort(userList, (o1, o2) -> {
                         if (o1.getStatusCode() == o2.getStatusCode()) {
                             return Long.compare(o2.getTimeStamp(), o1.getTimeStamp());
                         }
                         return Integer.compare(o2.getStatusCode(), o1.getStatusCode());
-                    }
-                });
-
-
+                    });
+                }else {
+                    Collections.sort(userList, (o1, o2) -> {
+                        if (o1.getStatusCode() == o2.getStatusCode()) {
+                            return Long.compare(o1.getTimeStamp(), o2.getTimeStamp());
+                        }
+                        return Integer.compare(o1.getStatusCode(), o2.getStatusCode());
+                    });
+                }
                 setFilterAdapter();
                 break;
             default:
