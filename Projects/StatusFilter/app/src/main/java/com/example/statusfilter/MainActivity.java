@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
                         return Integer.compare(o1.getStatusCode(), o2.getStatusCode());
                     });
                 }
-                setFilterAdapter();
+                adapter.notifyDataSetChanged();
                 break;
             default:
         }
